@@ -184,3 +184,84 @@ input[type="text"] {
   height: 100px;
   resize: vertical;
 }
+
+.rect-box.ML {
+  display: none;
+}
+
+/* .rect-box.ML.show {
+  display: flex;
+} */
+
+.rect-box.LLM {
+  display: none;
+}
+
+.rect-box.LLM.show {
+  display: flex;
+}
+
+.rect-box.Filters {
+  display: none;
+}
+
+.rect-box.Filters.show {
+  display: flex;
+}
+
+.rect-box.DataViz {
+  display: none;
+}
+
+.rect-box.DataViz.show {
+  display: flex;
+}
+
+.back-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+.edit-box {
+  position: absolute;
+  top: 80px;
+  left: -230px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: rotate(-180deg);
+  transition: transform;
+  /* transform: none; */
+}
+
+.edit-box.show {
+  display: flex;
+}
+
+#editor {
+  width: 500px;
+  height: 200px;
+  
+}
+#output {
+  width: 500px;
+  height: 100px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  overflow: auto;
+}
+
+/* 
+nav.open .nav-content span {
+  transform: rotate(-180deg);
+  transition: transform;
+} */

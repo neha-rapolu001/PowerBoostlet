@@ -12,6 +12,7 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <script src="https://boostlet.org/dist/boostlet.min.js"></script>
   </head>
 
   <body>
@@ -30,8 +31,10 @@
 
         <span style="--i: 3">
           <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-          <div class="text-area-container">
-            <textarea placeholder="Enter your text here..."></textarea>
+          <div class="edit-box">
+            <div id="editor">console.log("Hello, world!");</div>
+            <button onclick="runCode()">Run Code</button>
+            <div id="output"></div>
           </div>
         </span>
 
@@ -44,13 +47,68 @@
               <button class="rect-btn LLM">LLM Models</button>
             </div>
             <div class="button-row">
-              <button class="rect-btn filters">Filters</button>
-              <button class="rect-btn DV">Data visualisation</button>
+              <button class="rect-btn Filters">Filters</button>
+              <button class="rect-btn DataViz">Data visualisation</button>
+            </div>
+          </div>
+
+          <div class="rect-box ML">
+            <div class="button-row">
+              <button class="rect-btn">SAM</button>
+              <button class="rect-btn">Melanoma</button>
+            </div>
+            <div class="button-row">
+              <div class="back-arrow ML">
+                <i class="fa-solid fa-arrow-left"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="rect-box LLM">
+            <div class="button-row">
+              <button class="rect-btn">Image Captioning</button>
+            </div>
+            <div class="button-row">
+              <div class="back-arrow LLM">
+                <i class="fa-solid fa-arrow-left"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="rect-box Filters">
+            <div class="button-row">
+              <button class="rect-btn">Sobel</button>
+              <button class="rect-btn">Trako</button>
+            </div>
+            <div class="button-row">
+              <div class="back-arrow Filters">
+                <i class="fa-solid fa-arrow-left"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="rect-box DataViz">
+            <div class="button-row">
+              <button class="rect-btn">Plotly</button>
+            </div>
+            <div class="button-row">
+              <div class="back-arrow DataViz">
+                <i class="fa-solid fa-arrow-left"></i>
+              </div>
             </div>
           </div>
         </span>
       </div>
     </nav>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.33.0/ace.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.33.0/src-min-noconflict/theme-chrome.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ace-builds@1.33.0/css/ace.min.css"
+    />
+
     <script src="app.js"></script>
   </body>
 </html>
