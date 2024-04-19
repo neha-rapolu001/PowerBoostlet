@@ -161,12 +161,8 @@ function runCode() {
   }
 }
 
-// **********************
-
 // Function to show suggestions based on the input
 function showSuggestions(inputValue) {
-  // Filter your suggestions based on the input
-  // This part can be dynamic if you're fetching from a server
   const suggestions = {
     s: ["Sam", "Sobel"],
     S: ["Sam", "Sobel"],
@@ -178,11 +174,10 @@ function showSuggestions(inputValue) {
     P: ["plotly"],
     c: ["Cactus"],
     C: ["Cactus"],
-    // Add more suggestion triggers here
   };
 
   const suggestionsContainer = document.getElementById("suggestionsContainer");
-  // Clear previous suggestions
+
   suggestionsContainer.innerHTML = "";
 
   // Find suggestions that start with the input value
