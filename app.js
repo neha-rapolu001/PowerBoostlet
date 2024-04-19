@@ -43,30 +43,6 @@ nav.addEventListener("mouseleave", () => {
   nav.removeEventListener("mousemove", onDrag);
 });
 
-// Toggles the search container
-const searchIcon = document.querySelector(".fa-magnifying-glass").parentNode;
-const searchBox = document.querySelector(".search-box");
-
-searchIcon.addEventListener("click", () => {
-  searchBox.classList.toggle("show");
-});
-
-// Toggles the Boostlet container
-const rectIcon = document.querySelector(".fa-sharp.fa-solid.fa-b").parentNode;
-const rectBox = document.querySelector(".rect-box");
-
-rectIcon.addEventListener("click", () => {
-  rectBox.classList.toggle("show");
-});
-
-// Toggles the edit box container
-const penIcon = document.querySelector(".fa-regular.fa-pen-to-square");
-const editContainer = document.querySelector(".edit-box");
-
-penIcon.addEventListener("click", () => {
-  editContainer.classList.toggle("show");
-});
-
 // *********************** for boostlet icon ******************************
 //on clicking ML
 const mlBtn = document.querySelector(".rect-btn.ML");
@@ -116,70 +92,71 @@ backArrowDataViz.addEventListener("click", () => {
   DataVizRectBox.style.display = "none";
 });
 
-// *********************** for edit box  icon ******************************x
+// Function to close all open spans
+function closeAllSpans() {
+  document
+    .querySelectorAll(
+      ".nav-content .search-box, .nav-content .edit-box, .nav-content .rect-box"
+    )
+    .forEach(function (box) {
+      box.style.display = "none";
+    });
+}
 
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chaos");
-editor.session.setMode("ace/mode/javascript");
+// Function to toggle a span element
+function toggleSpan(span) {
+  // If the clicked span is already open, close it
+  if (span.style.display === "flex") {
+    span.style.display = "none";
+  } else {
+    // Close all spans first
+    closeAllSpans();
+    // Then open the clicked span
+    span.style.display = "flex";
+  }
+}
+
+// Add event listeners to each icon to toggle the corresponding span
+document
+  .querySelector(".fa-solid.fa-magnifying-glass")
+  .parentNode.addEventListener("click", function () {
+    toggleSpan(document.querySelector(".search-box"));
+  });
+
+document
+  .querySelector(".fa-regular.fa-pen-to-square")
+  .parentNode.addEventListener("click", function () {
+    toggleSpan(document.querySelector(".edit-box"));
+  });
+
+document
+  .querySelector(".fa-sharp.fa-solid.fa-b")
+  .parentNode.addEventListener("click", function () {
+    toggleSpan(document.querySelector(".rect-box"));
+  });
+
+// *********************** for edit box  icon ******************************
+
+var editor;
+document.addEventListener("DOMContentLoaded", function () {
+  editor = ace.edit("editor");
+  editor.setTheme("ace/theme/monokai");
+  editor.session.setMode("ace/mode/javascript");
+});
 
 function runCode() {
   const userCode = editor.getValue(); // Get the code from the editor
   const outputDiv = document.getElementById("output");
-  outputDiv.innerHTML = ""; // Clear previous outputs
+  outputDiv.innerHTML = ""; 
 
   // Capture console.log output
   console.log = function (message) {
-    outputDiv.innerHTML += message + "<br>"; // Append new log messages to the output div
+    outputDiv.innerHTML += message + "<br>"; 
   };
 
   try {
-    eval(userCode); // Execute the user code
+    eval(userCode); 
   } catch (e) {
-    console.log("Error: " + e.message); // Display errors in the output div
+    console.log("Error: " + e.message); 
   }
 }
-
-// // Function to run the code from the input and display output
-// function runCode(inputElement, labelElement) {
-//   try {
-//     // Since we cannot use 'eval' here for security reasons,
-//     // You will need to implement a secure way to run the JavaScript code.
-//     // This could be a Function constructor or other sandboxing technique.
-//     const result = Function(
-//       '"use strict";return (' + inputElement.value + ")"
-//     )();
-//     labelElement.textContent = `Result: ${result}`;
-//   } catch (error) {
-//     labelElement.textContent = `Error: ${error.message}`;
-//   }
-// }
-
-// // Event listener for each run button
-// document.querySelectorAll(".run-button").forEach((button, index) => {
-//   button.addEventListener("click", () => {
-//     const inputElement = document.querySelectorAll(".code-input")[index];
-//     const labelElement = document.querySelectorAll(".output-label")[index];
-//     runCode(inputElement, labelElement);
-//   });
-// });
-
-// // Assume there is a 'Run' button that executes this function
-// function runCommand() {
-//   const input = document.getElementById("codeInput").value;
-//   const editBox = document.querySelector(".edit-box");
-
-//   // Create a new label element
-//   let outputLabel = document.createElement("label");
-//   outputLabel.textContent = `You entered: ${input}`;
-
-//   // Append the new label to the edit box
-//   editBox.appendChild(outputLabel);
-
-//   // Adjust the edit box height if needed, but this will be handled by CSS automatically
-// }
-
-// // Optional: You might want to clear previous output before adding a new one
-// function clearPreviousOutput() {
-//   const labels = document.querySelectorAll(".edit-box label");
-//   labels.forEach((label) => label.remove());
-// }
