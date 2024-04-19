@@ -101,8 +101,6 @@ input[type="text"] {
   border-radius: 5px;
 }
 
-
-
 /* 2 */
 .rect-box {
   position: absolute;
@@ -211,4 +209,26 @@ input[type="text"] {
   border: 1px solid #ccc;
   padding: 5px;
   overflow: auto;
+}
+
+/* Styles for the suggestions container */
+#suggestionsContainer {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+}
+
+/* Style for each suggestion item */
+.suggestion-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
 }

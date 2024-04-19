@@ -147,16 +147,73 @@ document.addEventListener("DOMContentLoaded", function () {
 function runCode() {
   const userCode = editor.getValue(); // Get the code from the editor
   const outputDiv = document.getElementById("output");
-  outputDiv.innerHTML = ""; 
+  outputDiv.innerHTML = "";
 
   // Capture console.log output
   console.log = function (message) {
-    outputDiv.innerHTML += message + "<br>"; 
+    outputDiv.innerHTML += message + "<br>";
   };
 
   try {
-    eval(userCode); 
+    eval(userCode);
   } catch (e) {
-    console.log("Error: " + e.message); 
+    console.log("Error: " + e.message);
   }
 }
+
+// **********************
+
+// Function to show suggestions based on the input
+function showSuggestions(inputValue) {
+  // Filter your suggestions based on the input
+  // This part can be dynamic if you're fetching from a server
+  const suggestions = {
+    s: ["Sam", "Sobel"],
+    S: ["Sam", "Sobel"],
+    i: ["Image Captioning"],
+    I: ["Image Captioning"],
+    t: ["Tracko"],
+    T: ["Tracko"],
+    p: ["plotly"],
+    P: ["plotly"],
+    c: ["Cactus"],
+    C: ["Cactus"],
+    // Add more suggestion triggers here
+  };
+
+  const suggestionsContainer = document.getElementById("suggestionsContainer");
+  // Clear previous suggestions
+  suggestionsContainer.innerHTML = "";
+
+  // Find suggestions that start with the input value
+  let matchedSuggestions = [];
+  for (let key in suggestions) {
+    if (key.startsWith(inputValue.toLowerCase())) {
+      matchedSuggestions = matchedSuggestions.concat(suggestions[key]);
+    }
+  }
+
+  // Create the suggestion elements and add them to the suggestions container
+  matchedSuggestions.forEach(function (suggestion) {
+    const suggestionElement = document.createElement("div");
+    suggestionElement.classList.add("suggestion-item");
+    suggestionElement.textContent = suggestion;
+    suggestionElement.onclick = function () {
+      document.getElementById("searchInput").value = suggestion;
+      suggestionsContainer.innerHTML = ""; // Clear suggestions after selection
+    };
+    suggestionsContainer.appendChild(suggestionElement);
+  });
+
+  // Show suggestions if there are any matches
+  if (matchedSuggestions.length > 0) {
+    suggestionsContainer.style.display = "block";
+  } else {
+    suggestionsContainer.style.display = "none";
+  }
+}
+
+// Call the showSuggestions function whenever the input value changes
+document.getElementById("searchInput").addEventListener("input", function (e) {
+  showSuggestions(e.target.value);
+});

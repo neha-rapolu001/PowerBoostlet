@@ -21,13 +21,41 @@
         <div class="toggle-btn">
           <i class="fas fa-plus"></i>
         </div>
-
+        
         <span class="myspan" style="--i: 2">
           <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
           <div class="search-box">
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search..."
+              id="searchInput"
+              list="suggestions"
+            />
+            <datalist id="suggestions">
+              <!-- You can add other suggestions here -->
+              <option value="Sobel"></option>
+              <option value="Sam"></option>
+              <option value="Image Captioning"></option>
+              <option value="Plotly"></option>
+              <option value="Tracko"></option>
+              <option value="Cactus"></option>
+              <!-- More suggestions -->
+            </datalist>
           </div>
         </span>
+
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search..."
+            oninput="showSuggestions(this.value)"
+            autocomplete="off"
+          />
+          <div id="suggestionsContainer" class="suggestions"></div>
+        </div>
+
+        <!-- ***************** -->
 
         <span class="myspan" style="--i: 3">
           <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
