@@ -109,8 +109,6 @@ function toggleSpan(span) {
   if (span.style.display === "flex") {
     span.style.display = "none";
   } else {
-    // Close all spans first
-    closeAllSpans();
     // Then open the clicked span
     span.style.display = "flex";
   }
@@ -211,4 +209,50 @@ function showSuggestions(inputValue) {
 // Call the showSuggestions function whenever the input value changes
 document.getElementById("searchInput").addEventListener("input", function (e) {
   showSuggestions(e.target.value);
+});
+
+// Reusing the existing onDrag function for individual panels
+function onDragPanel(panel) {
+  function handleDrag({ movementX, movementY }) {
+    const panelStyle = window.getComputedStyle(panel);
+    const panelTop = parseInt(panelStyle.top);
+    const panelLeft = parseInt(panelStyle.left);
+
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+
+    let newTop = panelTop + movementY;
+    let newLeft = panelLeft + movementX;
+
+    // Vertical movement boundaries
+    if (newTop < 0) newTop = 0;
+    else if (newTop > windowHeight - panel.offsetHeight)
+      newTop = windowHeight - panel.offsetHeight;
+
+    // Horizontal movement boundaries
+    if (newLeft < 0) newLeft = 0;
+    else if (newLeft > windowWidth - panel.offsetWidth)
+      newLeft = windowWidth - panel.offsetWidth;
+
+    // Set the new top and left values
+    panel.style.top = `${newTop}px`;
+    panel.style.left = `${newLeft}px`;
+  }
+  
+  panel.addEventListener("mousedown", () => {
+    panel.addEventListener("mousemove", handleDrag);
+  });
+  
+  panel.addEventListener("mouseup", () => {
+    panel.removeEventListener("mousemove", handleDrag);
+  });
+
+  panel.addEventListener("mouseleave", () => {
+    panel.removeEventListener("mousemove", onDrag);
+  });
+}
+
+// Attach drag handlers to each panel
+document.querySelectorAll('.panel').forEach(panel => {
+  onDragPanel(panel);
 });
