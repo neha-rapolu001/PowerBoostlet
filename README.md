@@ -22,6 +22,11 @@ PowerBoostlet is a web-based tool designed to enhance productivity and efficienc
 - Font Awesome for icons
 - Boostlet API
 
+## Image
+
+<img width="1023" alt="image" src="https://github.com/neha-rapolu001/PowerBoostlet/assets/149213367/7005089e-487c-4de8-934f-4addb3099522">
+
+
 ## Setup
 
 To get PowerBoostlet running on your local machine:
